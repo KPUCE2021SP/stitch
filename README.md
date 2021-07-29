@@ -16,6 +16,6 @@
 > Firebase
 
 # 팀원 구성
-### > 1. 강태화 penline01@naver.com
+> 1. 강태화 penline01@naver.com
 > 2. 윤채림 ycl623@naver.com
 > 3. 김진 hjklkj12@naver.com
