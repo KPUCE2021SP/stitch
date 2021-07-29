@@ -12,8 +12,8 @@
 > 6. 아이디 검색을 통한 친구 추가
 
 # 개발환경
-> Android Studio
-> Firebase
+> * Android Studio
+> * Firebase
 
 # 팀원 구성
 > 1. 강태화 penline01@naver.com
