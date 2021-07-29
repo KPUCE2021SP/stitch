@@ -19,3 +19,6 @@
 > 1. 강태화 penline01@naver.com
 > 2. 윤채림 ycl623@naver.com
 > 3. 김진 hjklkj12@naver.com
+
+# 링크
+https://trello.com/b/Fhfll7Ri/stitch
