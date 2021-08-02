@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/apptitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:text="제주도 가자"
+        android:layout_gravity="center"
+        android:textColor="#000000"
+        />
+
+    <TextView
+        android:id="@+id/apptime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="2018.11.30 pm.10"
+        android:layout_gravity="center"
+        android:textColor="#000000"
+        />
+    <TextView
+        android:id="@+id/appdeptime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:text="3시에 출발해!"
+        android:layout_gravity="center"
+        android:textColor="#FF0000"
+        />
+    <TextView
+        android:id="@+id/applocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="모임 장소"
+        android:textColor="#000000"
+        />
+    <TextView
+        android:id="@+id/appwith"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="함께하는 사람 : 윤채림"
+        android:textColor="#000000"
+        />
+    <Button
+        android:id="@+id/btnok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="확인"/>
+
+    <Button
+        android:id="@+id/wherefriend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="위치보기"/>
+</LinearLayout>
