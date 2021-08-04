@@ -14,6 +14,7 @@
 ### 개발환경
 > <img src="https://img.shields.io/badge/Android-74DF00?style=flat-square&logo=Android&logoColor=white"/></a>
 > <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=white"/></a>
+> <img src="https://img.shields.io/badge/Kotlin-0095D5?style=flat-square&logo=Kotlin&logoColor=white"/></a>
 
 ### 팀원 구성
 > 1. 강태화 penline01@naver.com
