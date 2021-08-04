@@ -13,8 +13,7 @@
 
 ### 개발환경
 > <img src="https://img.shields.io/badge/Android-74DF00?style=flat-square&logo=Android&logoColor=white"/></a>
-
-> * Firebase
+> <img src="https://img.shields.io/badge/Firebase-FFCA28?style=flat-square&logo=Firebase&logoColor=white"/></a>
 
 ### 팀원 구성
 > 1. 강태화 penline01@naver.com
