@@ -12,7 +12,7 @@
 > 6. 아이디 검색을 통한 친구 추가
 
 ### 개발환경
-> <img src="https://img.shields.io/badge/Android-40FF00?style=flat-square&logo=Android&logoColor=white"/></a>
+> <img src="https://img.shields.io/badge/Android-74DF00?style=flat-square&logo=Android&logoColor=white"/></a>
 
 > * Firebase
 
