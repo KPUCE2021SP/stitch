@@ -1,0 +1,35 @@
+// mainactivity.kt 에서 진행후에, 하단 Logcat에서 hash 검색하면 키 나옴.
+
+package <패키지명>
+
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Base64
+import android.util.Log
+import androidx.annotation.RequiresApi
+import java.security.MessageDigest
+import java.util.*
+ 
+class MainActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.P)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        try {
+            val info = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNING_CERTIFICATES)
+            val signatures = info.signingInfo.apkContentsSigners
+            val md = MessageDigest.getInstance("SHA")
+            for (signature in signatures) {
+                val md: MessageDigest
+                md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                val key = String(Base64.encode(md.digest(), 0))
+                Log.d("Hash key:", "!!!!!!!$key!!!!!!")
+            }
+        } catch (e: Exception) {
+            Log.e("name not found", e.toString())
+        }
+    }
+}
