@@ -22,4 +22,5 @@
 > 3. 김진 hjklkj12@naver.com
 
 ### 링크
+> ![image](https://img.shields.io/badge/Trello-0052CC?style=flat-square&logo=Trello&logoColor=white)
 > <img src="https://img.shields.io/badge/Trello-0052CC?style=flat-square&logo=Trello&logoColor=white"/></a>
