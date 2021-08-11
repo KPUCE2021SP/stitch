@@ -24,11 +24,11 @@ class FriendRequest : AppCompatActivity() {
             toast("버튼 눌림")
 
             val firestore = Firebase.firestore
-            val currentUser = Firebase.auth.uid
-            val friendId = search_id.text.toString()
+            val currentUser = Firebase.auth.uid   // 현재 사용자 uid
+            val friendId = search_id.text.toString()   // 검색할 친구 아이디
 
             firestore.collection("users")
-                .whereEqualTo("id", friendId)
+                .whereEqualTo("id", friendId)  // 아이디 검색을 통해 친구 정보 가져옴
                 .get()
                 .addOnSuccessListener {
                     for(name in it!!.documents) {
@@ -39,8 +39,10 @@ class FriendRequest : AppCompatActivity() {
                             .document(currentUser!!)
                             .get()
                             .addOnSuccessListener {
-                                val currentUserId = it.get("id").toString()
+                                val currentUserId = it.get("id").toString() // 현재 사용자 id
 
+
+                                // 현재 사용자마다 친구 이름 db에 저장 -> 아직 해결 x
                                 val friendName = hashMapOf(
                                     "friend_name" to name["name"]
                                 )
