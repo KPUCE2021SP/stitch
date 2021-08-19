@@ -22,7 +22,7 @@ class Friend : AppCompatActivity() {
         setContentView(R.layout.friend)
         recView!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        var datas = mutableListOf<FriendData>()
+        val datas = mutableListOf<FriendData>()
 
         val friendAdapter : FriendAdapter = FriendAdapter(this)
 
@@ -41,6 +41,7 @@ class Friend : AppCompatActivity() {
 
         val db = Firebase.firestore
         val docRef = db.collection(currentUserEmail!!).document("Friend List")
+
         docRef.addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w("TAG", "Listen failed.", e)
@@ -54,6 +55,7 @@ class Friend : AppCompatActivity() {
                 val friendList = snapshot.data?.get("friend_name") as ArrayList<*>
                 val listSize = friendList.size
 
+                datas.clear()
                 for (i in 0 until listSize) {
                     datas.apply {
                         add(FriendData(friendList[i] as String))
