@@ -32,6 +32,10 @@ class Friend : AppCompatActivity() {
             startActivity<LoginActivity>()
         }
 
+        btn_app.setOnClickListener {
+            startActivity<Appointment>()
+        }
+
         // 친구추가 버튼 눌렀을 때 친구 요청 화면으로 이동
         btnFriendAdd.setOnClickListener {
             startActivity<FriendRequest>()
@@ -49,7 +53,7 @@ class Friend : AppCompatActivity() {
             }
 
             if (snapshot != null && snapshot.exists()) {
-                val d = Log.d("TAG", "data: ${snapshot.data}")
+                Log.d("TAG", "data: ${snapshot.data}")
                 toast(snapshot.data?.get("friend_name").toString())
 
                 val friendList = snapshot.data?.get("friend_name") as ArrayList<*>

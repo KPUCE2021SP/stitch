@@ -1,6 +1,7 @@
 package com.example.whyyou
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,7 +30,14 @@ class FriendAdapter(private val context: Context) : RecyclerView.Adapter<FriendA
 
         fun bind(item: FriendData) {
             friendName.text = item.name
+
+            itemView.setOnClickListener {
+                val intent = Intent(context,FriendAppAdd::class.java)
+                intent.putExtra("friend_name", item.name)
+                context.startActivity(intent)
+            }
         }
+
     }
 
     fun replaceList(newList: MutableList<FriendData>) {

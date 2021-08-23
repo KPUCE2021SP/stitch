@@ -20,6 +20,8 @@
         <activity android:name=".SignupActivity"/>
         <activity android:name=".Friend"/>
         <activity android:name=".FriendRequest"/>
+        <activity android:name=".FriendAppAdd"/>
+        <activity android:name=".Appointment"/>
     </application>
 
 </manifest>
