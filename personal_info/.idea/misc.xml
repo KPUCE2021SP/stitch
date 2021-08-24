@@ -7,8 +7,18 @@
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.21203703703703702" />
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/drawable/ic_launcher_background.xml" value="0.21203703703703702" />
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/activity_main.xml" value="0.2390625" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/content.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/content_main.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/fragment_main.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/fragment_sub.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/main_layout.xml" value="0.22916666666666666" />
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/main_navheader.xml" value="0.18342391304347827" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/main_toolbar.xml" value="0.22916666666666666" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/menu_navigation.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/layout/nav_header.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/menu/main_navigationmenu.xml" value="0.253125" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/menu/menu_main.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/personal_info/app/src/main/res/menu/menu_navigation.xml" value="0.23541666666666666" />
       </map>
     </option>
   </component>
