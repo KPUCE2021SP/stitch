@@ -12,7 +12,7 @@ class AppAdapter(private val context: Context) : RecyclerView.Adapter<AppAdapter
     private var datas = mutableListOf<AppData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppAdapter.ViewHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.app_listview, parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.app_listview, parent,false)
         return ViewHolder(view)
     }
 

@@ -1,11 +1,17 @@
 package com.example.whyyou
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Insets.add
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.Insets.add
 import androidx.core.view.OneShotPreDrawListener.add
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -16,61 +22,66 @@ import kotlinx.android.synthetic.main.friend.view.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
-class Friend : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.friend)
-        recView!!.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+class Friend : Fragment() {
 
-        val datas = mutableListOf<FriendData>()
+    @SuppressLint("InflateParams")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.friend, null).apply {
+            recView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-        val friendAdapter : FriendAdapter = FriendAdapter(this)
+            val datas = mutableListOf<FriendData>()
 
-        // 로그아웃 버튼 눌렀을 때 로그인 화면으로 이동
-        btn_sign_out.setOnClickListener {
-            Firebase.auth.signOut()
-            startActivity<LoginActivity>()
-        }
+            val friendAdapter: FriendAdapter = FriendAdapter(context)
 
-        btn_app.setOnClickListener {
-            startActivity<Appointment>()
-        }
-
-        // 친구추가 버튼 눌렀을 때 친구 요청 화면으로 이동
-        btnFriendAdd.setOnClickListener {
-            startActivity<FriendRequest>()
-        }
-
-        val currentUserEmail = Firebase.auth.currentUser?.email
-
-        val db = Firebase.firestore
-        val docRef = db.collection(currentUserEmail!!).document("Friend List")
-
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.w("TAG", "Listen failed.", e)
-                return@addSnapshotListener
+            // 로그아웃 버튼 눌렀을 때 로그인 화면으로 이동
+            btn_sign_out.setOnClickListener {
+                Firebase.auth.signOut()
+                val newIntent = Intent(context, LoginActivity::class.java)
+                startActivity(newIntent)
             }
 
-            if (snapshot != null && snapshot.exists()) {
-                Log.d("TAG", "data: ${snapshot.data}")
-                toast(snapshot.data?.get("friend_name").toString())
+            /*btn_app.setOnClickListener {
+                val newIntent = Intent(context, Appointment::class.java)
+                startActivity(newIntent)
+            }*/
 
-                val friendList = snapshot.data?.get("friend_name") as ArrayList<*>
-                val listSize = friendList.size
+            // 친구추가 버튼 눌렀을 때 친구 요청 화면으로 이동
+            btnFriendAdd.setOnClickListener {
+                val newIntent = Intent(context, FriendRequest::class.java)
+                startActivity(newIntent)
+            }
 
-                datas.clear()
-                for (i in 0 until listSize) {
-                    datas.apply {
-                        add(FriendData(friendList[i] as String))
-                    }
+            val currentUserEmail = Firebase.auth.currentUser?.email
+
+            val db = Firebase.firestore
+            val docRef = db.collection(currentUserEmail!!).document("Friend List")
+
+            docRef.addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    Log.w("TAG", "Listen failed.", e)
+                    return@addSnapshotListener
                 }
 
-                friendAdapter.replaceList(datas)
-                recView.adapter = friendAdapter
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d("TAG", "data: ${snapshot.data}")
+                    //toast(snapshot.data?.get("friend_name").toString())
 
-            } else {
-                Log.d("TAG", "data: null")
+                    val friendList = snapshot.data?.get("friend_name") as ArrayList<*>
+                    val listSize = friendList.size
+
+                    datas.clear()
+                    for (i in 0 until listSize) {
+                        datas.apply {
+                            add(FriendData(friendList[i] as String))
+                        }
+                    }
+
+                    friendAdapter.replaceList(datas)
+                    recView.adapter = friendAdapter
+
+                } else {
+                    Log.d("TAG", "data: null")
+                }
             }
         }
     }
