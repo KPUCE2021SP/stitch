@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/per_info/app/src/main/res/drawable-v24/ic_baseline_account_circle_24.xml" value="0.10555555555555556" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/per_info/app/src/main/res/drawable-v24/ic_baseline_exit_to_app_24.xml" value="0.10555555555555556" />
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/per_info/app/src/main/res/layout/activity_main.xml" value="0.16" />
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/per_info/app/src/main/res/layout/appbar.xml" value="0.1381340579710145" />
-        <entry key="..\:/Users/kimjin/AndroidStudioProjects/per_info/app/src/main/res/layout/header.xml" value="0.1381340579710145" />
+        <entry key="..\:/Users/kimjin/AndroidStudioProjects/per_info/app/src/main/res/layout/header.xml" value="0.4" />
         <entry key="..\:/Users/kimjin/AndroidStudioProjects/per_info/app/src/main/res/menu/menu_list.xml" value="0.25729166666666664" />
       </map>
     </option>

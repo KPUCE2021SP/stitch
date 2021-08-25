@@ -8,11 +8,19 @@
     android:orientation="vertical"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/profile_image"/>
+
     <TextView
-        android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Item"
-        android:textSize="50dp" />
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="Codechacha"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/profile_id"/>
 
 </LinearLayout>

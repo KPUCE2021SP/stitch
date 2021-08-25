@@ -31,9 +31,20 @@ class MainActivity : AppCompatActivity() {
 
         // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
         navigationView = findViewById(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(this) //navigation 리스너
-    }
 
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.account -> {
+
+                true
+            }R.id.logout -> {
+
+                true
+            }
+                else -> false
+            }
+        }
+    }
     // 툴바 메뉴 버튼이 클릭 됐을 때 실행하는 함수
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
@@ -46,16 +57,4 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
-    // 드로어 내 아이템 클릭 이벤트 처리하는 함
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.menu_item1-> Toast.makeText(this,"menu_item1 실행",Toast.LENGTH_SHORT).show()
-            R.id.menu_item2-> Toast.makeText(this,"menu_item2 실행",Toast.LENGTH_SHORT).show()
-            R.id.menu_item3-> Toast.makeText(this,"menu_item3 실행",Toast.LENGTH_SHORT).show()
-        }
-        return false
-    }
-
-
 }
