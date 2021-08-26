@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/friendname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="윤채림"
+        android:layout_gravity="center"
+        android:textColor="#000000"
+        />
+    <EditText
+        android:id="@+id/apptitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="약속 제목"/>
+
+    <Button
+        android:id="@+id/searchlocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="장소 검색"/>
+
+    <Button
+        android:id="@+id/datepick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="날짜/시간" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="확인"/>
+
+</LinearLayout>
