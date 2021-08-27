@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         Firebase.auth.signInWithEmailAndPassword(userEmail, password)
             .addOnCompleteListener(this) {
                 if (it.isSuccessful) { // 로그인 성공 시 MainActivity로 이동
-                    val newIntent = Intent(this, LoginActivity::class.java)
+                    val newIntent = Intent(this, MainActivity::class.java)
                     startActivity(newIntent)
                     finish()
                 } else {

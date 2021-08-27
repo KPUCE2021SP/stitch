@@ -45,4 +45,5 @@
             android:layout_height="wrap_content"
             android:text="History" />
     </com.google.android.material.tabs.TabLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
