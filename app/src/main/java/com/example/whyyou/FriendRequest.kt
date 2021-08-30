@@ -17,6 +17,7 @@ class FriendRequest : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.friend_request)
 
+        lateinit var currentUserName : String
 
         // 요청 버튼 눌렀을 때
         btn_request.setOnClickListener {
@@ -32,46 +33,96 @@ class FriendRequest : AppCompatActivity() {
 
                     //성공하면
                 .addOnSuccessListener {
+
+                    firestore.collection("users")
+                        .whereEqualTo("email", currentUserEmail)
+                        .get()
+                        .addOnSuccessListener {
+                            for (email in it!!.documents) {
+                                currentUserName = email["name"].toString()
+                            }
+                        }
+
                     for(name in it!!.documents) {
                         Log.d("success", name["name"].toString())
 
-                        firestore.collection(currentUserEmail!!).document("Friend List")
-                                .get()
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        val document = task.result
-                                        if (document!!.exists()) {
-                                            firestore.collection(currentUserEmail).document("Friend List")
-                                                    .update("friend_name", FieldValue.arrayUnion(name["name"]))
-                                                    .addOnSuccessListener {
-                                                        toast("저장 성공")
-                                                        finish()
-                                                    }
-                                        }
-                                        else {
-                                            val friendList = arrayListOf<String>()    // 친구 이름 저장할 배열
+                        firestore.collection(name["email"] as String).document("Friend Request List")
+                            .get()
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val document = task.result
+                                    if (document!!.exists()) {
+                                        firestore.collection(name["email"] as String)
+                                            .document("Friend Request List")
+                                            .update(
+                                                "friend_name",
+                                                FieldValue.arrayUnion(currentUserName)
+                                            )
+                                            .addOnSuccessListener {
+                                                toast("저장 성공")
+                                                finish()
+                                            }
+                                    }
+                                    else {
+                                        val friendRequestList = arrayListOf<String>()    // 친구 이름 저장할 배열
 
-                                            friendList.add(name["name"].toString())
-                                            toast(friendList.toString())
+                                        friendRequestList.add(currentUserName)
+                                        toast(friendRequestList.toString())
 
-                                            val friendName = hashMapOf(
-                                                    "friend_name" to friendList)
+                                        val friendName = hashMapOf(
+                                            "friend_name" to friendRequestList)
 
-                                            firestore.collection(currentUserEmail).document("Friend List")
-                                                    .set(friendName)
-                                                    .addOnSuccessListener {
-                                                        toast("저장 성공")
-                                                        finish()
-                                                    }
-                                                    .addOnFailureListener {
-                                                        toast("저장 실패")
-                                                    }
-                                        }
+                                        firestore.collection(name["email"] as String)
+                                            .document("Friend Request List")
+                                            .set(friendName)
+                                            .addOnSuccessListener {
+                                                toast("저장 성공")
+                                                finish()
+                                            }
+                                            .addOnFailureListener {
+                                                toast("저장 실패")
+                                            }
                                     }
                                 }
-                                .addOnFailureListener {
-                                    toast("fail")
-                                }
+                            }
+
+//                        firestore.collection(currentUserEmail!!).document("Friend List")
+//                                .get()
+//                                .addOnCompleteListener { task ->
+//                                    if (task.isSuccessful) {
+//                                        val document = task.result
+//                                        if (document!!.exists()) {
+//                                            firestore.collection(currentUserEmail).document("Friend List")
+//                                                    .update("friend_name", FieldValue.arrayUnion(name["name"]))
+//                                                    .addOnSuccessListener {
+//                                                        toast("저장 성공")
+//                                                        finish()
+//                                                    }
+//                                        }
+//                                        else {
+//                                            val friendList = arrayListOf<String>()    // 친구 이름 저장할 배열
+//
+//                                            friendList.add(name["name"].toString())
+//                                            toast(friendList.toString())
+//
+//                                            val friendName = hashMapOf(
+//                                                    "friend_name" to friendList)
+//
+//                                            firestore.collection(currentUserEmail).document("Friend List")
+//                                                    .set(friendName)
+//                                                    .addOnSuccessListener {
+//                                                        toast("저장 성공")
+//                                                        finish()
+//                                                    }
+//                                                    .addOnFailureListener {
+//                                                        toast("저장 실패")
+//                                                    }
+//                                        }
+//                                    }
+//                                }
+//                                .addOnFailureListener {
+//                                    toast("fail")
+//                                }
                     }
                 }
                     //실패하면

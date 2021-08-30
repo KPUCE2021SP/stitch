@@ -33,12 +33,12 @@ class Friend : Fragment() {
 
             val friendAdapter: FriendAdapter = FriendAdapter(context)
 
-            // 로그아웃 버튼 눌렀을 때 로그인 화면으로 이동
-            btn_sign_out.setOnClickListener {
-                Firebase.auth.signOut()
-                val newIntent = Intent(context, LoginActivity::class.java)
-                startActivity(newIntent)
-            }
+//            // 로그아웃 버튼 눌렀을 때 로그인 화면으로 이동
+//            btn_sign_out.setOnClickListener {
+//                Firebase.auth.signOut()
+//                val newIntent = Intent(context, LoginActivity::class.java)
+//                startActivity(newIntent)
+//            }
 
             /*btn_app.setOnClickListener {
                 val newIntent = Intent(context, Appointment::class.java)

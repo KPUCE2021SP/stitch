@@ -1,28 +1,23 @@
 package com.example.whyyou
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
-import com.google.api.ResourceDescriptor
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
 
-//    private lateinit var appBarConfiguration: AppBarConfiguration
-//    private lateinit var navController: NavController
+    lateinit var navigationView: NavigationView
+    lateinit var drawerLayout: DrawerLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,48 +40,47 @@ class MainActivity : AppCompatActivity() {
         after_login_viewpager.adapter = adapter
         after_login_tablayout.setupWithViewPager(after_login_viewpager)
 
-//        btn_sign_out.setOnClickListener {
-//            Firebase.auth.signOut()
-//            startActivity<LoginActivity>()
-//        }
+        val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
+        setSupportActionBar(toolbar) // 툴바 적용
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // 드로어를 꺼낼 홈 버튼 활성화
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_baseline_dehaze_24) // 홈버튼 이미지 변경
+        supportActionBar?.setDisplayShowTitleEnabled(false) // 툴바에 타이틀 안보이게
 
-//        navController = Navigation.findNavController(this, R.id.nav_fragment)
-//        appBarConfiguration = AppBarConfiguration(navController.graph, drawer_layout)
-//
-//        // Set up ActionBar
-//        setSupportActionBar(toolbar)
-//        setupActionBarWithNavController(navController, appBarConfiguration)
-//
-//        // Set up navigation menu
-//        navigation_view.setupWithNavController(navController)
+        // 네비게이션 드로어 생
+        drawerLayout = findViewById(R.id.drawer_layout)
+
+        // 네비게이션 드로어 내에있는 화면의 이벤트를 처리하기 위해 생성
+        navigationView = findViewById(R.id.nav_view)
+
+        navigationView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.account -> {
+                    true
+                }R.id.logout -> {
+                    Firebase.auth.signOut()
+                    startActivity<LoginActivity>()
+                    true
+                }R.id.friendRequest -> {
+                    startActivity<FriendRequestList>()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
-//    override fun onSupportNavigateUp(): Boolean {
-//        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-//    }
-//
-//    override fun onBackPressed() {
-//        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-//            drawer_layout.closeDrawer(GravityCompat.START)
-//        } else {
-//            super.onBackPressed()
-//        }
-//    }
-//
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        return when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+    // 툴바 메뉴 버튼이 클릭 됐을 때 실행하는 함수
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        // 클릭한 툴바 메뉴 아이템 id 마다 다르게 실행하도록 설정
+        when(item.itemId){
+            android.R.id.home->{
+                // 햄버거 버튼 클릭시 네비게이션 드로어 열기
+                drawerLayout.openDrawer(GravityCompat.START)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 }
