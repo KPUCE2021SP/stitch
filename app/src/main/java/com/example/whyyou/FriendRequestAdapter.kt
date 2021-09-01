@@ -2,6 +2,7 @@ package com.example.whyyou
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.friend_request_listview.view.*
 
+@Suppress("NAME_SHADOWING")
 class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<FriendRequestAdapter.ViewHolder>(){
 
     private var datas = mutableListOf<FriendRequestData>()
@@ -40,6 +42,7 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
             itemView.request_ok.setOnClickListener {
                 Toast.makeText(context, "수락", Toast.LENGTH_SHORT).show()
                 myFriendList(item.name)
+                friendFriendList(item.name)
             }
 
             itemView.setOnClickListener {
@@ -93,5 +96,67 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
             .addOnFailureListener {
                 Toast.makeText(context, "저장 실패", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    fun friendFriendList(name: String) {
+        lateinit var currentUserName : String
+        lateinit var friendEmail : String
+
+        val firestore = Firebase.firestore
+        val currentUserEmail = Firebase.auth.currentUser!!.email
+
+        // 내 이름 가져오기
+        firestore.collection("users")
+                .whereEqualTo("email", currentUserEmail)
+                .get()
+                .addOnSuccessListener {
+                    for (email in it!!.documents) {
+                        currentUserName = email["name"].toString()
+                    }
+                }
+
+        // 친구 이메일 가져오기
+        firestore.collection("users")
+                .whereEqualTo("name", name)
+                .get()
+                .addOnSuccessListener {
+                    for (name in it!!.documents) {
+                        friendEmail = name["email"].toString()
+                        Toast.makeText(context, friendEmail, Toast.LENGTH_SHORT).show()
+                    }
+
+                    // 친구 db에 내 이름 추가
+                    firestore.collection(friendEmail).document("Friend List")
+                            .get()
+                            .addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    val document = task.result
+                                    if (document!!.exists()){
+                                        firestore.collection(friendEmail).document("Friend List")
+                                                .update("friend_name", FieldValue.arrayUnion(currentUserName))
+                                                .addOnSuccessListener {
+                                                    Toast.makeText(context, "저장 성공", Toast.LENGTH_SHORT).show()
+                                                }
+                                    }
+                                    else {
+                                        val friendList = arrayListOf<String>()
+                                        friendList.add(currentUserName)
+
+                                        val friendName = hashMapOf(
+                                                "friend_name" to friendList
+                                        )
+
+                                        firestore.collection(friendEmail).document("Friend List")
+                                                .set(friendName)
+                                                .addOnSuccessListener {
+                                                    Toast.makeText(context, "저장 성공", Toast.LENGTH_SHORT).show()
+                                                }
+                                                .addOnFailureListener {
+                                                    Toast.makeText(context, "저장 실패", Toast.LENGTH_SHORT).show()
+                                                }
+                                    }
+                                }
+                            }
+                }
     }
 }

@@ -85,44 +85,6 @@ class FriendRequest : AppCompatActivity() {
                                     }
                                 }
                             }
-
-//                        firestore.collection(currentUserEmail!!).document("Friend List")
-//                                .get()
-//                                .addOnCompleteListener { task ->
-//                                    if (task.isSuccessful) {
-//                                        val document = task.result
-//                                        if (document!!.exists()) {
-//                                            firestore.collection(currentUserEmail).document("Friend List")
-//                                                    .update("friend_name", FieldValue.arrayUnion(name["name"]))
-//                                                    .addOnSuccessListener {
-//                                                        toast("저장 성공")
-//                                                        finish()
-//                                                    }
-//                                        }
-//                                        else {
-//                                            val friendList = arrayListOf<String>()    // 친구 이름 저장할 배열
-//
-//                                            friendList.add(name["name"].toString())
-//                                            toast(friendList.toString())
-//
-//                                            val friendName = hashMapOf(
-//                                                    "friend_name" to friendList)
-//
-//                                            firestore.collection(currentUserEmail).document("Friend List")
-//                                                    .set(friendName)
-//                                                    .addOnSuccessListener {
-//                                                        toast("저장 성공")
-//                                                        finish()
-//                                                    }
-//                                                    .addOnFailureListener {
-//                                                        toast("저장 실패")
-//                                                    }
-//                                        }
-//                                    }
-//                                }
-//                                .addOnFailureListener {
-//                                    toast("fail")
-//                                }
                     }
                 }
                     //실패하면
