@@ -1,16 +1,13 @@
 package com.example.whyyou
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
-import android.graphics.Insets.add
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.Insets.add
-import androidx.core.view.OneShotPreDrawListener.add
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,31 +16,13 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.friend.*
 import kotlinx.android.synthetic.main.friend.view.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 class Friend : Fragment() {
-
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.friend, null).apply {
             recView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-            val datas = mutableListOf<FriendData>()
-
-            val friendAdapter: FriendAdapter = FriendAdapter(context)
-
-//            // 로그아웃 버튼 눌렀을 때 로그인 화면으로 이동
-//            btn_sign_out.setOnClickListener {
-//                Firebase.auth.signOut()
-//                val newIntent = Intent(context, LoginActivity::class.java)
-//                startActivity(newIntent)
-//            }
-
-            /*btn_app.setOnClickListener {
-                val newIntent = Intent(context, Appointment::class.java)
-                startActivity(newIntent)
-            }*/
 
             // 친구추가 버튼 눌렀을 때 친구 요청 화면으로 이동
             btnFriendAdd.setOnClickListener {
@@ -51,10 +30,37 @@ class Friend : Fragment() {
                 startActivity(newIntent)
             }
 
+            val datas = mutableListOf<FriendData>()
+            val friendAdapter : FriendAdapter = FriendAdapter(context)
             val currentUserEmail = Firebase.auth.currentUser?.email
-
             val db = Firebase.firestore
             val docRef = db.collection(currentUserEmail!!).document("Friend List")
+
+            docRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val doc = task.result
+
+                    if (doc!!.exists()) {
+                        val friendList = doc.data?.get("friend_name") as ArrayList<*>
+                        val listSize = friendList.size
+
+                        datas.clear()
+                        for (i in 0 until listSize) {
+                            datas.apply {
+                                add(FriendData(friendList[i] as String))
+                            }
+                        }
+
+                        friendAdapter.replaceList(datas)
+                        recView.adapter = friendAdapter
+                    }
+                    else {
+                        datas.clear()
+                        friendAdapter.replaceList(datas)
+                        recView.adapter = friendAdapter
+                    }
+                }
+            }
 
             docRef.addSnapshotListener { snapshot, e ->
                 if (e != null) {

@@ -1,5 +1,7 @@
 package com.example.whyyou
 
-data class FriendData (
+import com.google.firebase.firestore.DocumentSnapshot
+
+data class FriendData(
         val name: String
         )

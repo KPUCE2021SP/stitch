@@ -35,7 +35,6 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val friendName = itemView.request_friend_name
 
-
         fun bind(item: FriendRequestData) {
             friendName.text = item.name
 
@@ -43,6 +42,18 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
                 Toast.makeText(context, "수락", Toast.LENGTH_SHORT).show()
                 myFriendList(item.name)
                 friendFriendList(item.name)
+
+                // 각자 리스트에 이름 추가 후 요청 목록에서 삭제
+                removeRequestItem(item.name)
+                datas.remove(item)
+                notifyDataSetChanged()
+            }
+
+            itemView.request_cancel.setOnClickListener {
+                removeRequestItem(item.name)
+                datas.remove(item)
+                notifyDataSetChanged()
+                Toast.makeText(context, "삭제 성공", Toast.LENGTH_SHORT).show()
             }
 
             itemView.setOnClickListener {
@@ -50,9 +61,7 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
                 intent.putExtra("friend_name", item.name)
                 context.startActivity(intent)
             }
-
         }
-
     }
 
     fun replaceList(newList: MutableList<FriendRequestData>) {
@@ -60,6 +69,7 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
         notifyDataSetChanged()
     }
 
+    // 현재 사용자 친구 목록에 추가
     fun myFriendList(name: String) {
         val firestore = Firebase.firestore
         val currentUserEmail = Firebase.auth.currentUser!!.email
@@ -98,6 +108,7 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
             }
     }
 
+    // 친구의 친구 목록에 내 이름 추가
     fun friendFriendList(name: String) {
         lateinit var currentUserName : String
         lateinit var friendEmail : String
@@ -157,6 +168,20 @@ class FriendRequestAdapter(private val context: Context) : RecyclerView.Adapter<
                                     }
                                 }
                             }
+                }
+    }
+
+    fun removeRequestItem(name: String) {
+        val firestore = Firebase.firestore
+        val currentUserEmail = Firebase.auth.currentUser!!.email
+
+        val ref = firestore.collection(currentUserEmail!!).document("Friend Request List")
+        ref.update("friend_name",FieldValue.arrayRemove(name))
+                .addOnSuccessListener {
+                    Toast.makeText(context, "db 삭제 성공", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(context, "db 삭제 실패", Toast.LENGTH_SHORT).show()
                 }
     }
 }

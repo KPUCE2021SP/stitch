@@ -28,9 +28,29 @@ class Appointment : Fragment() {
 
             val currentUserEmail = Firebase.auth.currentUser?.email
             val db = Firebase.firestore
-            val colRef = db.collection(currentUserEmail!!).document("App List").collection("App List")
+            val docRef = db.collection(currentUserEmail!!).document("App List").collection("App List")
 
-            colRef.addSnapshotListener { snapshot, e ->
+            docRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val doc = task.result
+
+                    for (snapshot in doc!!) {
+                        val appTitle = snapshot.data["Title"].toString()
+                        val friendName = snapshot.data["friend_name"].toString()
+                        val appDate = snapshot.data["Date"].toString()
+                        val appTime = snapshot.data["Time"].toString()
+
+                        datas.apply {
+                            add(AppData(appTitle, friendName, appDate, appTime))
+                        }
+
+                        appAdapter.replaceList(datas)
+                        recView.adapter = appAdapter
+                    }
+                }
+            }
+
+            docRef.addSnapshotListener { snapshot, e ->
                 if (e != null) {
                     Log.w("TAG", "Listen failed.", e)
                     return@addSnapshotListener

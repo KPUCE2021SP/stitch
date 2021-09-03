@@ -33,18 +33,17 @@ class FriendRequest : AppCompatActivity() {
 
                     //성공하면
                 .addOnSuccessListener {
-
-                    firestore.collection("users")
-                        .whereEqualTo("email", currentUserEmail)
-                        .get()
-                        .addOnSuccessListener {
-                            for (email in it!!.documents) {
-                                currentUserName = email["name"].toString()
-                            }
-                        }
-
                     for(name in it!!.documents) {
                         Log.d("success", name["name"].toString())
+
+                        firestore.collection("users")
+                                .whereEqualTo("email", currentUserEmail)
+                                .get()
+                                .addOnSuccessListener {
+                                    for (email in it!!.documents) {
+                                        currentUserName = email["name"].toString()
+                                    }
+                                }
 
                         firestore.collection(name["email"] as String).document("Friend Request List")
                             .get()

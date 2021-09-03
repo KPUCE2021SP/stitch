@@ -28,7 +28,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-//        startActivity<Friend>()
 
         val after_login_viewpager = findViewById<ViewPager>(R.id.dlg_date_viewpager)
         val after_login_tablayout = findViewById<TabLayout>(R.id.dlg_date_tablayout)
@@ -39,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 //        adapter.addFragment(ResourceDescriptor.History(), "Emo")
         after_login_viewpager.adapter = adapter
         after_login_tablayout.setupWithViewPager(after_login_viewpager)
+
+
 
         val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용
