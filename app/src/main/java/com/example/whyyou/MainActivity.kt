@@ -10,8 +10,11 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import com.google.api.ResourceDescriptor
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.header.*
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
@@ -35,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = ViewpagerAdapter(supportFragmentManager)
         adapter.addFragment(Friend(), "Friend")
         adapter.addFragment(Appointment(), "Appointment")
-//        adapter.addFragment(ResourceDescriptor.History(), "Emo")
+        adapter.addFragment(History(), "History")
         after_login_viewpager.adapter = adapter
         after_login_tablayout.setupWithViewPager(after_login_viewpager)
 
@@ -56,17 +59,14 @@ class MainActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.account -> {
-                    true
-                }R.id.logout -> {
+                R.id.logout -> {
                     Firebase.auth.signOut()
                     startActivity<LoginActivity>()
                     true
                 }R.id.friendRequest -> {
                     startActivity<FriendRequestList>()
                     true
-                }
-                else -> false
+                }else -> false
             }
         }
     }
@@ -79,6 +79,17 @@ class MainActivity : AppCompatActivity() {
             android.R.id.home->{
                 // 햄버거 버튼 클릭시 네비게이션 드로어 열기
                 drawerLayout.openDrawer(GravityCompat.START)
+
+                val firestore = Firebase.firestore
+                val currentUserEmail = Firebase.auth.currentUser!!.email
+                firestore.collection("users")
+                        .whereEqualTo("email", currentUserEmail)
+                        .get()
+                        .addOnSuccessListener {
+                            for (email in it!!.documents) {
+                                profile_id.text = email["name"].toString()
+                            }
+                        }
             }
         }
         return super.onOptionsItemSelected(item)

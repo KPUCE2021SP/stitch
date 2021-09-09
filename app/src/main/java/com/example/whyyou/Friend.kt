@@ -3,12 +3,14 @@ package com.example.whyyou
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ClipDrawable.VERTICAL
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
@@ -23,6 +25,8 @@ class Friend : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.friend, null).apply {
             recView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            val decoration = DividerItemDecoration(context, 1)
+            recView.addItemDecoration(decoration)
 
             // 친구추가 버튼 눌렀을 때 친구 요청 화면으로 이동
             btnFriendAdd.setOnClickListener {

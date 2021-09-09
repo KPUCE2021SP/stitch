@@ -6,14 +6,16 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.friend.*
+import kotlinx.android.synthetic.main.friend_app_add.*
 import org.jetbrains.anko.toast
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Suppress("NAME_SHADOWING")
 class Appointment : Fragment() {
@@ -34,14 +36,26 @@ class Appointment : Fragment() {
                 if (task.isSuccessful) {
                     val doc = task.result
 
+                    datas.clear()
                     for (snapshot in doc!!) {
                         val appTitle = snapshot.data["Title"].toString()
-                        val friendName = snapshot.data["friend_name"].toString()
+                        val friendName = snapshot.data["Friend_name"].toString()
                         val appDate = snapshot.data["Date"].toString()
                         val appTime = snapshot.data["Time"].toString()
+                        val appLocation = snapshot.data["Location"].toString()
 
-                        datas.apply {
-                            add(AppData(appTitle, friendName, appDate, appTime))
+                        val long_now = System.currentTimeMillis()
+                        val t_date = Date(long_now)
+                        val t_dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+                        val str_date = t_dateFormat.format(t_date)
+
+                        val app_date = Integer.parseInt(appDate.substring(0,4) + appDate.substring(5,7) + appDate.substring(8))
+                        val cur_date = Integer.parseInt(str_date)
+
+                        if (app_date >= cur_date) {
+                            datas.apply {
+                                add(AppData(appTitle, friendName, appDate, appTime, appLocation))
+                            }
                         }
 
                         appAdapter.replaceList(datas)
@@ -59,12 +73,23 @@ class Appointment : Fragment() {
                 datas.clear()
                 for (snapshot in snapshot!!) {
                     val appTitle = snapshot.data["Title"].toString()
-                    val friendName = snapshot.data["friend_name"].toString()
+                    val friendName = snapshot.data["Friend_name"].toString()
                     val appDate = snapshot.data["Date"].toString()
                     val appTime = snapshot.data["Time"].toString()
+                    val appLocation = snapshot.data["Location"].toString()
 
-                    datas.apply {
-                        add(AppData(appTitle, friendName, appDate, appTime))
+                    val long_now = System.currentTimeMillis()
+                    val t_date = Date(long_now)
+                    val t_dateFormat = SimpleDateFormat("yyyyMMdd", Locale("ko", "KR"))
+                    val str_date = t_dateFormat.format(t_date)
+
+                    val app_date = Integer.parseInt(appDate.substring(0,4) + appDate.substring(5,7) + appDate.substring(8))
+                    val cur_date = Integer.parseInt(str_date)
+
+                    if (app_date >= cur_date) {
+                        datas.apply {
+                            add(AppData(appTitle, friendName, appDate, appTime, appLocation))
+                        }
                     }
 
                     appAdapter.replaceList(datas)

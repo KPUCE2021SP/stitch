@@ -1,6 +1,7 @@
 package com.example.whyyou
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,18 @@ class AppAdapter(private val context: Context) : RecyclerView.Adapter<AppAdapter
         fun bind(item: AppData) {
             appTitle.text = item.title
             appDate.text = item.date
+
+            itemView.setOnClickListener {
+                val intent = Intent(context,AppDetail::class.java)
+                intent.putExtra("friend_name", item.friendName)
+                intent.putExtra("app_date", item.date)
+                intent.putExtra("app_time", item.time)
+                intent.putExtra("app_title", item.title)
+                intent.putExtra("app_location", item.location)
+
+                context.startActivity(intent)
+            }
+
         }
     }
 

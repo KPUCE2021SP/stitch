@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.whyyou">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,9 +24,15 @@
         </activity>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".SignupActivity"/>
-        <activity android:name=".FriendRequest" />
-        <activity android:name=".FriendAppAdd" />
+        <activity android:name=".FriendRequest"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
+        <activity android:name=".FriendAppAdd"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
         <activity android:name=".FriendRequestList" />
+        <activity android:name=".AppSearchLocation" />
+        <activity android:name=".AppDetail"
+            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
+
     </application>
 
 </manifest>

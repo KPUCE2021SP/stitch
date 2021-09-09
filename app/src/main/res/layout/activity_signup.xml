@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Email"
-        android:textSize="22sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="HardcodedText,MissingConstraints" />
 
@@ -21,19 +21,67 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Password"
-        android:textSize="22sp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/userEmail"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <EditText
-        android:id="@+id/userId"
+        android:id="@+id/checkUserPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:hint="ID"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@id/userPassword"
+        android:hint="Password 확인"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/userPassword"
         tools:ignore="HardcodedText,MissingConstraints" />
+
+    <TextView
+        android:id="@+id/checkPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="12sp"
+        android:text="비밀번호를 다시 입력하세요."
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/checkUserPassword"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/userId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="ID"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/checkPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/checkIdBtn"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <Button
+        android:id="@+id/checkIdBtn"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="중복 확인"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/checkPassword"
+        app:layout_constraintStart_toEndOf="@id/userId"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/checkId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="12sp"
+        android:text="아이디 확인"
+        android:textColor="#FF0000"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/userId"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/userName"
@@ -41,8 +89,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="Name"
-        android:textSize="22sp"
-        app:layout_constraintTop_toBottomOf="@id/userId"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/checkId"
         tools:ignore="HardcodedText,MissingConstraints" />
 
     <Button
@@ -51,7 +99,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:text="SIGN UP"
-    android:textSize="22sp"
+    android:textSize="16sp"
     app:layout_constraintTop_toBottomOf="@+id/userName"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
