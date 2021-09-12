@@ -29,7 +29,6 @@ class AppSearchLocation : AppCompatActivity() {
     private var tMapView: TMapView? = null
     private val TMapAPIKey = "l7xxa9aa43c6f00e4c02b8812a7e4a5df6c9"
 
-
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +64,6 @@ class AppSearchLocation : AppCompatActivity() {
                     latitude2 = t.latitude     // 입력한 목적지의 위도
                     longitude2 = t.longitude   // 입력한 목적지의 경도
                     toast("$latitude2, $longitude2")
-
 
                 }
             }

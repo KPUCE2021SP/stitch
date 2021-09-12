@@ -9,7 +9,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,14 +26,15 @@
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnFriendAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="bottom|right"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="#80CBC4"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             android:clickable="true"
-            android:src="@drawable/ic_action_name"
+            android:src="@drawable/add_user"
+            android:scaleType="fitCenter"
+            android:backgroundTint="@color/white"
             tools:ignore="ContentDescription,MissingConstraints,RtlHardcoded,UnusedAttribute" />
     </FrameLayout>
 

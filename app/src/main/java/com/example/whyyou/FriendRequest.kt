@@ -21,6 +21,10 @@ class FriendRequest : AppCompatActivity() {
 
         lateinit var currentUserName : String
 
+        friend_addclose.setOnClickListener {
+            finish()
+        }
+
         // 요청 버튼 눌렀을 때
         btn_request.setOnClickListener {
 
@@ -78,7 +82,6 @@ class FriendRequest : AppCompatActivity() {
                                             .set(friendName)
                                             .addOnSuccessListener {
                                                 toast("저장 성공")
-                                                finish()
                                             }
                                             .addOnFailureListener {
                                                 toast("저장 실패")

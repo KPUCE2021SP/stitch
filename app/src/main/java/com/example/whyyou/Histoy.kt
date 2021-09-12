@@ -25,12 +25,6 @@ class History : Fragment() {
     private var tMapView: TMapView? = null
     private val TMapAPIKey = "l7xxa9aa43c6f00e4c02b8812a7e4a5df6c9"
 
-//    var mapPoint = arrayListOf<HistoryMapPoint>(
-//            HistoryMapPoint("N서울 타워", 126.988205, 37.551135),
-//            HistoryMapPoint("경복궁",126.976998, 37.579600),
-//            HistoryMapPoint("SKT 타워", 126.985302, 37.570841)
-//    )
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.history, null).apply {
 

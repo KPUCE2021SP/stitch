@@ -22,6 +22,7 @@
         android:text="이름"
         android:layout_weight="2"
         android:layout_marginStart="10dp"
+        android:fontFamily="@font/fontstyle"
         tools:ignore="InefficientWeight,RtlHardcoded" />
 
     <LinearLayout
@@ -38,6 +39,7 @@
             android:gravity="center"
             android:textColor="#000000"
             android:text="수락"
+            android:fontFamily="@font/fontstyle"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
             />
@@ -50,6 +52,7 @@
             android:gravity="center"
             android:textColor="#000000"
             android:text="삭제"
+            android:fontFamily="@font/fontstyle"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"/>

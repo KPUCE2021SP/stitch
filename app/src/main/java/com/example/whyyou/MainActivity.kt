@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
-
         val after_login_viewpager = findViewById<ViewPager>(R.id.dlg_date_viewpager)
         val after_login_tablayout = findViewById<TabLayout>(R.id.dlg_date_tablayout)
 
@@ -42,7 +41,9 @@ class MainActivity : AppCompatActivity() {
         after_login_viewpager.adapter = adapter
         after_login_tablayout.setupWithViewPager(after_login_viewpager)
 
-
+        after_login_tablayout.getTabAt(0)?.setIcon(R.drawable.friends_1)
+        after_login_tablayout.getTabAt(1)?.setIcon(R.drawable.appointment)
+        after_login_tablayout.getTabAt(2)?.setIcon(R.drawable.history_map)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar) // toolBar를 통해 App Bar 생성
         setSupportActionBar(toolbar) // 툴바 적용

@@ -3,6 +3,7 @@ package com.example.whyyou
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
@@ -14,8 +15,9 @@ class FriendRequestList:AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.friend_request_list)
-
         recView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        val decoration = DividerItemDecoration(this, 1)
+        recView.addItemDecoration(decoration)
 
         val datas = mutableListOf<FriendRequestData>()
 

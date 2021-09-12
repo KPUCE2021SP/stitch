@@ -4,8 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.app_datail.*
-import kotlinx.android.synthetic.main.friend_app_add.friendname
+import kotlinx.android.synthetic.main.app_detail.*
 
 class AppDetail : AppCompatActivity() {
 
@@ -14,12 +13,19 @@ class AppDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.app_datail)
+        setContentView(R.layout.app_detail)
 
         appdtitle.text = intent.getStringExtra("app_title")
         appdtime.text = intent.getStringExtra("app_date") + " " + intent.getStringExtra("app_time")
         appdwith.text = "with " + intent.getStringExtra("friend_name")
-        appdlocation.text = "장소 : " + intent.getStringExtra("app_location")
+        appdlocation.text = "at " + intent.getStringExtra("app_location")
 
+        btn_close.setOnClickListener {
+            finish()
+        }
+
+        btndok.setOnClickListener {
+            //수정???
+        }
     }
 }

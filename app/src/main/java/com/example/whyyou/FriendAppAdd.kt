@@ -52,8 +52,11 @@ class FriendAppAdd : AppCompatActivity() {
 
         friendname.text = intent.getStringExtra("friend_name")
 
-        val et_Date = findViewById<View>(R.id.app_datepick) as EditText
+        app_addclose.setOnClickListener {
+            finish()
+        }
 
+        val et_Date = findViewById<View>(R.id.app_datepick) as EditText
         et_Date.setOnClickListener {
             DatePickerDialog(
                     this,
@@ -65,7 +68,6 @@ class FriendAppAdd : AppCompatActivity() {
         }
 
         val et_time = findViewById<View>(R.id.app_timepick) as EditText
-
         et_time.setOnClickListener {
             val mcurrentTime = Calendar.getInstance()
             val hour = mcurrentTime[Calendar.HOUR_OF_DAY]

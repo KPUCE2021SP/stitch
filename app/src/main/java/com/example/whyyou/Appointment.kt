@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.friend.*
+import kotlinx.android.synthetic.main.friend.recView
+import kotlinx.android.synthetic.main.friend.view.*
 import kotlinx.android.synthetic.main.friend_app_add.*
 import org.jetbrains.anko.toast
 import java.text.SimpleDateFormat
@@ -24,6 +27,8 @@ class Appointment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.app, null).apply {
             recView?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            val decoration = DividerItemDecoration(context, 1)
+            recView.addItemDecoration(decoration)
 
             val datas = mutableListOf<AppData>()
             val appAdapter : AppAdapter = AppAdapter(context)
